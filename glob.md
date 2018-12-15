@@ -26,3 +26,14 @@ im_pillow = np.array(Image.open('lena.jpg'))
     cv2.imshow("cv2", im)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+    
+    
+from PIL import Image
+img = cv2.imread('lena.jpg')
+width,height=640,480
+img = cv2.resize(img,(width, height))
+Image.fromarray(img).save('resize.jpg')
+print(img.shape)
+cv2.imshow("cv2", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
