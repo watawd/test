@@ -1,0 +1,10 @@
+# 元となる画像の読み込み
+img = Image.open('lena.jpg')
+#オリジナル画像の幅と高さを取得
+width, height = img.size
+# オリジナル画像と同じサイズのImageオブジェクトを作成する
+img2 = Image.new('RGB', (width, height))
+
+img_pixels = np.array([[img.getpixel((i,j)) for j in range(height)] for i in range(width)])
+
+print(img_pixels[100][200])
