@@ -17,17 +17,18 @@ def get_file(dir_path):
     return filenames
 
 
-pic = sorted(glob.glob(r"F:/o/*.jpg"))
+pic = sorted(glob.glob(r"F:/test/n000624/*.jpg"))
+
 
 for i in pic:
     # 画像の読み込み
     image_gs = cv2.imread(i)
-
+    po = cv2.resize(image_gs, (300, 300))
     # 顔認識用特徴量ファイルを読み込む --- （カスケードファイルのパスを指定）
     cascade = cv2.CascadeClassifier("C:/Users/natur/AppData/Local/Programs/Python/Python37/Lib\site-packages/cv2/data/haarcascade_frontalface_default.xml")
 
     # 顔認識の実行
-    face_list = cascade.detectMultiScale(image_gs, scaleFactor=1.1, minNeighbors=1, minSize=(1, 1))
+    face_list = cascade.detectMultiScale(po, scaleFactor=1.1, minNeighbors=1, minSize=(1, 1))
 
     # 顔だけ切り出して保存
     no = 1;
@@ -36,14 +37,16 @@ for i in pic:
         y = rect[1]
         width = rect[2]
         height = rect[3]
-        dst = image_gs[y:y + height, x:x + width]
-        save_path = out_jpg + '/' + 'out_(' + str(i) + ')' + str(no) + '.jpg'
-        print(save_path,dst.shape)
+        dst = po[y:y + height, x:x + width]
+        #save_path = out_jpg + '/' + 'out_(' + str(i) + ')' + str(no) + '.jpg'
+        print(dst.shape)
 
         # 認識結果の保存
         #plt.show(plt.imshow(np.asarray(Image.open(save_path))))
         #print(no)
         no += 1
+
+
 
 
 
